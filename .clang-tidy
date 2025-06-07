@@ -1,0 +1,49 @@
+Checks: "-*,
+  bugprone-*,
+    -bugprone-easily-swappable-parameters,
+  cert-*,
+    -cert-dcl21-cpp,-cert-err58-cpp,
+  clang-analyzer*,
+  concurrency-*,
+  cppcoreguidelines-*,
+    -cppcoreguidelines-avoid-magic-numbers,-cppcoreguidelines-explicit-virtual-functions,
+    -cppcoreguidelines-avoid-non-const-global-variables,-cppcoreguidelines-rvalue-reference-param-not-moved,
+    -cppcoreguidelines-pro-bounds-constant-array-index,
+  misc-*,
+    -misc-use-internal-linkage,
+  modernize-*,
+    -modernize-use-override,-modernize-use-nodiscard,
+  performance-*,
+  portability-*,
+  readability-*,
+    -readability-magic-numbers,-readability-identifier-length"
+HeaderFilterRegex: ".*.[^c]pp"
+CheckOptions:
+  - { key: misc-non-private-member-variables-in-classes.IgnoreClassesWithAllMemberVariablesBeingPublic, value: true }
+  - { key: readability-identifier-naming.NamespaceCase, value: lower_case }
+  - { key: readability-identifier-naming.ClassCase, value: CamelCase }
+  - { key: readability-identifier-naming.StructCase, value: CamelCase }
+  - { key: readability-identifier-naming.EnumCase, value: CamelCase }
+  - { key: readability-identifier-naming.ScopedEnumCase, value: CamelCase }
+  - { key: readability-identifier-naming.UnionCase, value: CamelCase }
+  - { key: readability-identifier-naming.TypeAliasCase, value: CamelCase }
+  - { key: readability-identifier-naming.TypedefCase, value: CamelCase }
+  - {
+      key: readability-identifier-naming.TemplateParameterCase,
+      value: CamelCase,
+    }
+  - {
+      key: readability-identifier-naming.ValueTemplateParameterCase,
+      value: lower_case,
+    }
+  - { key: readability-identifier-naming.ClassConstantCase, value: lower_case }
+  - { key: readability-identifier-naming.ClassMemberCase, value: lower_case }
+  - { key: readability-identifier-naming.MethodCase, value: lower_case }
+  - { key: readability-identifier-naming.MemberCase, value: lower_case }
+  - { key: readability-identifier-naming.FunctionCase, value: lower_case }
+  - { key: readability-identifier-naming.ParameterCase, value: lower_case }
+  - { key: readability-identifier-naming.VariableCase, value: lower_case }
+  - { key: readability-identifier-naming.ConstantCase, value: lower_case }
+  - { key: readability-identifier-naming.PrivateMemberSuffix, value: _ }
+  - { key: readability-identifier-naming.ProtectedMemberSuffix, value: _ }
+  - { key: readability-identifier-naming.MacroDefinition, value: UPPER_CASE }
