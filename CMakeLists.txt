@@ -13,7 +13,7 @@ if(ENABLE_ADDRESS_SANITIZER)
   target_link_options(base INTERFACE -fsanitize=address)
 endif()
 
-set(quests quest01)
+set(quests quest01 quest02)
 
 foreach(quest ${quests})
   add_executable(${quest} ${quest}/main.cpp)
