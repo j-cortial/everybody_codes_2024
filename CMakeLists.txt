@@ -21,7 +21,7 @@ foreach(quest ${quests})
   set_property(TARGET ${quest} PROPERTY RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${quest})
   target_link_libraries(${quest} base)
 
-  file(GLOB inputs RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/${quest}/input?.txt)
+  file(GLOB inputs RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/${quest}/*.txt)
   foreach(input ${inputs})
     configure_file(${input} ${input} COPYONLY)
   endforeach()
