@@ -29,6 +29,7 @@ auto parse_input(std::istream&& in) {
                                      return token | std::ranges::to<std::string>();
                                    }) |
                                    std::ranges::to<std::vector>();
+
                    return std::make_pair(parent, std::move(children));
                  });
 
@@ -54,30 +55,28 @@ auto breed(const LifeCycle& life_cycle, const Population& current) -> Population
   return result;
 }
 
-auto solve_part1(const auto& input) {
-  Population population{{"A", 1UZ}};
-  for (auto _ : std::views::iota(0, 4)) {
-    population = breed(input, population);
+auto breed(const LifeCycle& life_cycle, Population population, const std::size_t cycles)
+    -> Population {
+  for (auto _ : std::views::iota(0UZ, cycles)) {
+    population = breed(life_cycle, population);
   }
+  return population;
+}
+
+auto population_count(const LifeCycle& life_cycle, const Population& initial_population,
+                      const std::size_t cycles) -> std::size_t {
+  const Population population = breed(life_cycle, initial_population, cycles);
   return std::ranges::fold_left(std::views::values(population), std::size_t{}, std::plus<>{});
 }
 
-auto solve_part2(const auto& input) {
-  Population population{{"Z", 1UZ}};
-  for (auto _ : std::views::iota(0, 10)) {
-    population = breed(input, population);
-  }
-  return std::ranges::fold_left(std::views::values(population), std::size_t{}, std::plus<>{});
-}
+auto solve_part1(const auto& input) { return population_count(input, {{"A", 1UZ}}, 4UZ); }
+
+auto solve_part2(const auto& input) { return population_count(input, {{"Z", 1UZ}}, 10UZ); }
 
 auto solve_part3(const auto& input) {
   const auto [min, max] = std::ranges::minmax(
       std::views::keys(input) | std::views::transform([&input](const Category& category) {
-        Population population{{category, 1UZ}};
-        for (auto _ : std::views::iota(0, 20)) {
-          population = breed(input, population);
-        }
-        return std::ranges::fold_left(std::views::values(population), std::size_t{}, std::plus<>{});
+        return population_count(input, {{category, 1UZ}}, 20UZ);
       }));
   return max - min;
 }
